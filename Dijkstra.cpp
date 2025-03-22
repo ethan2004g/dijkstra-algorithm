@@ -58,5 +58,15 @@ pair<vector<int>, long long> dijkstra_path(const vector<vector<Edge>>& graph, in
         return make_pair(vector<int>(), LLONG_MAX);
     }
 
-
+    // Reconstruct the path by walking backwards from 'end'
+    vector<int> path;
+    for (int current = end; current != -1; current = parent[current]) {
+        path.push_back(current);
+    }
+    reverse(path.begin(), path.end());
+    return make_pair(path, dist[end]);
 }
+
+
+
+
