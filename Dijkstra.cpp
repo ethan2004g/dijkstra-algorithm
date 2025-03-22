@@ -52,5 +52,11 @@ pair<vector<int>, long long> dijkstra_path(const vector<vector<Edge>>& graph, in
             }
         }
     }
-    
+
+    // If dist[end] is still LLONG_MAX, there's no path
+    if (dist[end] == LLONG_MAX) {
+        return make_pair(vector<int>(), LLONG_MAX);
+    }
+
+
 }
