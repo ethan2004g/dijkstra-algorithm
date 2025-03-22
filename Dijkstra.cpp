@@ -31,4 +31,26 @@ pair<vector<int>, long long> dijkstra_path(const vector<vector<Edge>>& graph, in
     // Push (0, start) onto our queue to begin
     pq.push({0, start});
     
+    // Main Dijkstra loop
+    while (!pq.empty()) {
+        auto [currDist, u] = pq.top();
+        pq.pop();
+
+        // If we've already found a better path to 'u', skip this one
+        if (currDist > dist[u]) continue;
+
+        // If 'u' is the end, we're done
+        if (u == end) break;
+
+        // Relax edges from 'u'
+        for (auto& [v, w] : graph[u]) {
+            long long newDist = dist[u] + w;
+            if (newDist < dist[v]) {
+                dist[v] = newDist;
+                parent[v] = u;
+                pq.push({newDist, v});
+            }
+        }
+    }
+    
 }
